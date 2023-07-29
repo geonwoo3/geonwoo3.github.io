@@ -84,7 +84,7 @@ async function init() {
         d3.select('svg').selectAll("rect").remove();
 
         d3.select('svg').selectAll('rect')
-        .data(year_d)
+        .data(land_d)
         .enter()
         .append("rect")
         .attr('transform','translate(50,50)')
