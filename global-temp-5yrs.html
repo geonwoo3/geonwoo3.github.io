@@ -82,7 +82,7 @@ async function init() {
         d3.select('svg').selectAll("rect").remove();
 
         svg.append("g").attr("transform", "translate(50,50)")
-        .data(data)
+        .data(year_d)
         .enter()
         .append("rect")
         .attr('transform','translate(175,75)')
