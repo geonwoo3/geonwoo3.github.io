@@ -81,12 +81,12 @@ async function init() {
             land(this.value);
         } else if (this.value === 'Land and Ocean') {
             landAndOcean(this.value);
-        } else if (this.value == 'North Hemisphere') {
+        } else if (this.value === 'North Hemisphere') {
             nhem(this.value);
         } else {
             shem(this.value);
         }
-    ;});
+    });
 
 
 
@@ -95,7 +95,7 @@ async function init() {
         
         console.log(value);
 
-        //g.selectAll('rect').remove();
+        g.selectAll('rect').remove();
 
         g.attr("transform", "translate(50, 50)")
         .selectAll('rect')
