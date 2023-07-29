@@ -34,10 +34,10 @@
 <script>
 
 async function init() {
-
+    var margin = 50;
     var svg = d3.select("svg");
     var g = svg.append('g').attr("transform", "translate("+margin+", "+margin+")");
-    var margin = 50;
+    
 
     
     const data = await d3.csv("global-temp-5yr_csv.csv");
@@ -101,7 +101,7 @@ async function init() {
         .enter()
         .append("rect")
         .attr("x", function(d) { return xscale(d); })
-        .attr("y", function(d) {return yscale(d);})
+        .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
         .attr("height",function(d, i) {return scale_land[i];});
         
