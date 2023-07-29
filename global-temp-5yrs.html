@@ -152,12 +152,6 @@ async function init() {
     };
 
 
-    svg.append("g").attr("transform", "translate(50,50)").selectAll("rect")
-    .data(data).enter()
-    .append("rect")
-    .attr("x", function(d) { return xscale(d.Year); })
-    .attr("y", function(d, i) { return yscale(d.Land); })
-    .attr("width", xscale.bandwidth())
     
 
     svg.append("g")
