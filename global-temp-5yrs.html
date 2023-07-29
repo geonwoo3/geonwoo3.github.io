@@ -36,6 +36,7 @@
 async function init() {
 
     var svg = d3.select("svg");
+    var g = svg.append('g').attr("transform", "translate("+margin+", "+margin+")");
     var margin = 50;
 
     
@@ -90,9 +91,9 @@ async function init() {
         
         console.log(value);
 
-        d3.select('svg').selectAll('rect').remove();
+        g.selectAll('rect').remove();
 
-        d3.select('svg').selectAll('rect')
+        g.selectAll('rect')
         .data(year_d)
         .enter()
         .append("rect")
