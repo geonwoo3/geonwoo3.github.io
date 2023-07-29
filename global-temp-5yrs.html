@@ -101,8 +101,8 @@ async function init() {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return xscale(d); })
-        .attr("y", function(d) { return yscale(d); })
+        .attr("x", function(d, i) { return xscale[i]; })
+        .attr("y", function(d, i) { return yscale[i]; })
         .attr("width", w)
         .attr("height",function(d, i) {return scale_land[i];});
         
