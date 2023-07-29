@@ -38,9 +38,9 @@ async function init() {
     
     globalTemp5yr = await d3.csv("global-temp-5yr_csv.csv")
     
-    var x = d3.scaleBand().rangeRound([1880, 2014]).domain(globalTemp5yr.map(function(d) { return d.Year; }))
-    var y = d3.scaleLinear().range([5,-5]).domain([0, 200]);
-    var h = d3.scaleLinear().domain([0, 200]).range([0,500]);
+    var x = d3.scaleBand().range([1880, 2014]).domain(globalTemp5yr.map(function(d) { return d.Year; }))
+    var y = d3.scaleLinear().range([5,-5]).domain([-1, 1]);
+    var h = d3.scaleLinear().range([-5, 5]).domain([-1, 1])
     var w = x.bandwidth();
 
 
@@ -61,7 +61,7 @@ async function init() {
     .enter()
     .append('option')
     .text(function (d) { return d; })
-    .property("selected", function (d) {return d === 'asdasdasd'})
+    .property("selected", function (d) {return d === 'Land'; });
 
     d3.select("#Region")
     .on("change", function() {
@@ -74,7 +74,7 @@ async function init() {
         } else {
             shem(this.value)
         }
-    })
+    });
 
     function land(value) {
         console.log(value);
