@@ -47,8 +47,8 @@ async function init() {
     const nhem_d = data.map(d => +d.NHem);
     
     var xscale = d3.scaleBand().range([0, 1000]).domain([year_d]);
-    var yscale = d3.scaleLinear().range([300,0]).domain([land_d]);
-    var h = d3.scaleLinear().domain([land_d]).range([0, 300]).bandwidth();
+    var yscale = d3.scaleLinear().range([1500,0]).domain([land_d]);
+    var h = d3.scaleLinear().domain([land_d]).range([0, 1500]).bandwidth();
     var w = xscale.bandwidth();
 
 
@@ -93,9 +93,9 @@ async function init() {
         .append("rect")
         .attr('transform','translate(50,50)')
         .attr("x", function(d) { return xscale(year_d); })
-        .attr("y",function(d, i) {return yscale(d.Land);})
+        .attr("y",function(d, i) {return yscale(land_d);})
         .attr("width", w)
-        .attr("height",function(d) {return h(d.Land);});
+        .attr("height",function(d, i) {return h(land_d);});
         
 
         
@@ -156,9 +156,9 @@ async function init() {
     .data(year_d).enter()
     .append("rect")
     .attr("x", function(d) { return xscale(year_d); })
-    .attr("y", function(d) { return yscale(d); })
+    .attr("y", function(d, i) { return yscale(land_d); })
     .attr("width", xscale.bandwidth())
-    .attr("height", function(d) { return h(d); });
+    .attr("height", function(d, i) { return h(land_d); });
 
     svg.append("g")
     .attr("transform","translate("+margin+","+margin+")")
