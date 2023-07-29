@@ -48,7 +48,12 @@ async function init() {
     
     var xscale = d3.scaleBand().range([0, 1000]).domain([year_d]);
     var yscale = d3.scaleLinear().range([1500,0]).domain([1, -1]);
-    var h = d3.scaleLinear().domain([-1, 1]).range([0, 1500]);
+
+    var scale_land = d3.scaleLinear().domain([land_d]).range([0, 1500]);
+    var scale_landAndOcean = d3.scaleLinear().domain([landAndOcean_d]).range([0, 1500]);
+    var scale_shem = d3.scaleLinear().domain([shem_d]).range([0, 1500]);
+    var scale_nhem = d3.scaleLinear().domain([nhem_d]).range([0, 1500]);
+
     var w = xscale.bandwidth();
 
 
@@ -95,7 +100,7 @@ async function init() {
         .attr("x", function(d) { return xscale(year_d); })
         .attr("y",function(d) {return yscale(land_d);})
         .attr("width", w)
-        .attr("height",function(d, i) {return h(land_d);});
+        .attr("height",function(d, i) {return scale_land(land_d);});
         
 
         
@@ -113,7 +118,7 @@ async function init() {
         .attr("x", function(d) { return xscale(year_d); })
         .attr('y',function(d) {return yscale(landAndOcean_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(landAndOcean_d);});
+        .attr('height',function(d) {return scale_landAndOcean(landAndOcean_d);});
         
        
     };
@@ -130,7 +135,7 @@ async function init() {
         .attr("x", function(d) { return xscale(year_d); })
         .attr('y',function(d) {return yscale(nhem_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(nhem_d);});
+        .attr('height',function(d) {return scale_nhem(nhem_d);});
 
     };
 
@@ -147,7 +152,7 @@ async function init() {
         .attr("x", function(d) { return xscale(year_d); })
         .attr('y',function(d) {return yscale(shem_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(shem_d);});
+        .attr('height',function(d) {return scale_land(shem_d);});
 
     };
 
