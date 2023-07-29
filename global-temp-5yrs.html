@@ -47,7 +47,7 @@ async function init() {
     const nhem_d = data.map(d => +d.NHem);
     
     var xscale = d3.scaleBand().range([0, 1000]).domain([year_d]);
-    var yscale = d3.scaleLinear().range([200,0]).domain([-1.00,1.00]);
+    var yscale = d3.scaleLinear().range([100,0]).domain([-1.00,1.00]);
     var h = d3.scaleLinear().range([0, 200]).domain([-1.00, 1.00]);
     var w = xscale.bandwidth();
 
