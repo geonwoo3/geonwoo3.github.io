@@ -9,23 +9,12 @@
 
 
 
-<p class="stats">Region</p>
-<style>
-    rect {fill: antiquewhite; stroke:white; }
-    p.Region { position: absolute; left: 5px; top: 250px; }
-    select { position: absolute; left: 5px; top: 290px; }
-    div.slide { position: absolute; left: 5px; top: 220px; }
-</style>
-<select id="stats"></select>
-
-
-
 
 <p>Click on the image to start exploring!</p>>
 <a href="main.html">
     <img
-    src = data/A_large_blank_world_map_with_oceans_marked_in_blue.png;
-    alt = "the picture"/>
+    src = https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.carbonbrief.org%2Fmapped-how-every-part-of-the-world-has-warmed-and-could-continue-to-warm%2F&psig=AOvVaw200to3bVyhJpATOnaIo7X7&ust=1690707503800000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNCiv7PGs4ADFQAAAAAdAAAAABAE;
+    alt = "global warming picture"/>
 </a>
 
 
@@ -40,26 +29,6 @@
 <script>
 
 async function init() {
-
-    
-    const globalTempAnnual = await d3.csv("data/global-temp-annual_csv.csv")
-    
-    var x = d3.scaleBand().rangeRound([1880, 2014]).domain(globalTempAnnual.map(function(d) { return d.Year; }))
-    var y = d3.scaleLinear().range([5,-5]).domain([0, 200]);
-    var h = d3.scaleLinear().domain([0, 200]).range([0,500]);
-    var w = x.bandwidth();
-
-
-
-
-    var tooltip = d3.select("body").append("div")
-                    .attr("class", "tooltip")
-                    .style("style", "absolute")
-                    .style("z-index", 10)
-                    .style("visibility", "hidden")
-                    .text("Simple test");
-    
-
 
 
 }
