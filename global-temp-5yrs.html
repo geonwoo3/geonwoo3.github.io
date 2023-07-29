@@ -35,8 +35,8 @@
 
 async function init() {
 
-    svg = d3.select("svg");
-    margin = 50;
+    var svg = d3.select("svg");
+    var margin = 50;
 
     
     globalTemp5yr = await d3.csv("global-temp-5yr_csv.csv")
@@ -50,10 +50,10 @@ async function init() {
 
 
 
-    var Region = ['Land', 'Land and Ocean', 'North Hemisphere', 'South Hemisphere'];
+    var stats = ['Land', 'Land and Ocean', 'North Hemisphere', 'South Hemisphere'];
     d3.select('select')
     .selectAll('groups')
-    .data(Region)
+    .data(stats)
     .enter()
     .append('option')
     .text(function (d) { return d; })
