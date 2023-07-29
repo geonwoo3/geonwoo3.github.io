@@ -9,14 +9,14 @@
 
 
 
-<p class="Region">Regional Choices</p>
+<p class="stats">Regional Choices</p>
 <style>
     rect {fill: antiquewhite;}
     p.Region { position: absolute; left: 5px; top: 250px; }
     select { position: absolute; left: 5px; top: 290px; }
     div.slide { position: absolute; left: 5px; top: 220px; }
 </style>
-<select id="Region"></select>
+<select id="stats"></select>
 
 
 
@@ -122,13 +122,7 @@ async function init() {
         .attr('y',function(d) {return y(d.LandAndOcean);})
         .attr("width", w)
         .attr('height',function(d,i) {return h(d.LandAndOcean);})
-        .append('title')
-        .text(d => "Average Puppy Price: " + d.AverageBabyPrice +
-                    "\nWorking Group: " + d.Group1 )
-            .on("mouseover", d => {tooltip.text(d.BreedName + " Average Puppy Price: " + d.AverageBabyPrice + "\nWorking Group: " + d.Group1); return tooltip.style("visibility", "visible")})
-            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-            .on("mouseout", () => tooltip.style("visibility", "hidden"));
-
+        
         svg
             .append('g')
             .selectAll('rect')
@@ -159,12 +153,6 @@ async function init() {
         .attr('y',function(d) {return y(d.NHem);})
         .attr("width", w)
         .attr('height',function(d,i) {return h(d.NHem);})
-        .append('title')
-        .text(d => "Average Puppy Price: " + d.AverageBabyPrice +
-                    "\nWorking Group: " + d.Group1 )
-            .on("mouseover", d => {tooltip.text(d.BreedName + " Average Puppy Price: " + d.AverageBabyPrice + "\nWorking Group: " + d.Group1); return tooltip.style("visibility", "visible")})
-            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-            .on("mouseout", () => tooltip.style("visibility", "hidden"));
 
         svg
             .append('g')
@@ -197,12 +185,6 @@ async function init() {
         .attr('y',function(d) {return y(d.SHem);})
         .attr("width", w)
         .attr('height',function(d,i) {return h(d.SHem);})
-        .append('title')
-        .text(d => "Average Puppy Price: " + d.AverageBabyPrice +
-                    "\nWorking Group: " + d.Group1 )
-            .on("mouseover", d => {tooltip.text(d.BreedName + " Average Puppy Price: " + d.AverageBabyPrice + "\nWorking Group: " + d.Group1); return tooltip.style("visibility", "visible")})
-            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-            .on("mouseout", () => tooltip.style("visibility", "hidden"));
 
         svg
             .append('g')
@@ -226,13 +208,13 @@ async function init() {
         .data(data)
         .enter()
         .append('text')
-        .text(function(d) { return d.PopularityUS2017})
+        .text(function(d) { return d.Land})
         .attr('id', 'barstat')
         .attr('transform','translate(185,45)')
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr('x', function(d) { return x(d.BreedName); })
-        .attr('y', function(d) { return y(d.PopularityUS2017); })
+        .attr('x', function(d) { return x(d.Year); })
+        .attr('y', function(d) { return y(d.Land); })
         .attr('dy', '1.5em')
 
     svg
