@@ -95,7 +95,7 @@ async function init() {
         .attr("x", function(d) { return xscale(year_d); })
         .attr("y",function(d, i) {return yscale(d.Land);})
         .attr("width", w)
-        .attr("height",function(d, i) {return h(d.Land);});
+        .attr("height",function(d) {return h(d.Land);});
         
 
         
