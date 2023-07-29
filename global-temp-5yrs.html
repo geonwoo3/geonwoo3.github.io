@@ -50,11 +50,11 @@ async function init() {
     var xscale = d3.scaleBand().range([0, 5000]).domain(year_d);
     //var xscale = year_d.map(value => x(value));
 
-    var yscale = d3.scaleLinear().range([1500,0]).domain([1, -1]);
+    var yscale = d3.scaleLinear().range([1500,0]).domain([-1, 1]);
     var hh = d3.scaleLinear().range([0, 1500]).domain([-1, 1]);
 
-    var scale_land = land_d.map(value => hh(value));
     //var scale_land = land_d.map(value => hh(value));
+    var scale_land = d3.scaleLinear().range([0,1500]).domain(land_d);
     var scale_landAndOcean = d3.scaleLinear().domain([landAndOcean_d]).range([0, 1500]);
     var scale_shem = d3.scaleLinear().domain([shem_d]).range([0, 1500]);
     var scale_nhem = d3.scaleLinear().domain([nhem_d]).range([0, 1500]);
@@ -102,10 +102,10 @@ async function init() {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d, i) { return xscale[i]; })
-        .attr("y", function(d, i) { return yscale[i]; })
+        .attr("x", function(d) { return xscale(d); })
+        .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
-        .attr("height",function(d, i) {return scale_land[i];});
+        .attr("height",function(d) {return scale_land(d);});
         
 
         
