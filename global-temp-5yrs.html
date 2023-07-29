@@ -63,7 +63,7 @@ async function init() {
     .text(function (d) { return d; })
     .property("selected", function (d) {return d === 'Land'; });
 
-    d3.select("#Region")
+    d3.select("#stats")
     .on("change", function() {
         if (this.value === 'Land') {
             land(this.value)
