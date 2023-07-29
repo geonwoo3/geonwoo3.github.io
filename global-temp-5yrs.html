@@ -92,10 +92,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(50,50)')
-        .attr("x", function(d) { return xscale(year_d); })
-        .attr("y",function(d, i) {return yscale(land_d);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y",function(d, i) {return yscale(d.Land);})
         .attr("width", w)
-        .attr("height",function(d, i) {return h(land_d);});
+        .attr("height",function(d, i) {return h(d.Land);});
         
 
         
@@ -155,10 +155,10 @@ async function init() {
     svg.append("g").attr("transform", "translate(50,50)").selectAll("rect")
     .data(year_d).enter()
     .append("rect")
-    .attr("x", function(d) { return xscale(year_d); })
-    .attr("y", function(d, i) { return yscale(land_d); })
+    .attr("x", function(d) { return xscale(d.Year); })
+    .attr("y", function(d, i) { return yscale(d.Land); })
     .attr("width", xscale.bandwidth())
-    .attr("height", function(d, i) { return h(land_d); });
+    .attr("height", function(d, i) { return h(d.Land); });
 
     svg.append("g")
     .attr("transform","translate("+margin+","+margin+")")
