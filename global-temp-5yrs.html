@@ -75,7 +75,6 @@ async function init() {
     function land(value) {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
-        d3.select('svg').selectAll('#barstat').remove();
 
         svg.append("g").attr("transform", "translate(50,50)")
         .data(data)
@@ -94,7 +93,6 @@ async function init() {
     function landAndOcean(value) {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
-        d3.select('svg').selectAll('#barstat').remove();
 
         svg.append("g").attr("transform", "translate(50,50)")
         .data(data)
@@ -112,7 +110,6 @@ async function init() {
     function nhem(value) {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
-        d3.select('svg').selectAll('#barstat').remove();
 
         svg.append("g").attr("transform", "translate(50,50)")
         .data(data)
@@ -130,7 +127,6 @@ async function init() {
     function shem(value) {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
-        d3.select('svg').selectAll('#barstat').remove();
 
         svg.append("g").attr("transform", "translate(50,50)")
         .data(data)
