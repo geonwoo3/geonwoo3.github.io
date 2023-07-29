@@ -38,7 +38,7 @@ async function init() {
     
     globalTemp5yr = await d3.csv("global-temp-5yr_csv.csv")
     
-    var x = d3.scaleBand().range([1880, 2014]).domain(globalTemp5yr.map(function(d) { return d.Year; }))
+    var x = d3.scaleBand().range([0, 2014 - 1880]).domain([1880, 2014])
     var y = d3.scaleLinear().range([5,-5]).domain([-1, 1]);
     var h = d3.scaleLinear().range([-5, 5]).domain([-1, 1])
     var w = x.bandwidth();
@@ -46,13 +46,6 @@ async function init() {
 
 
 
-    var tooltip = d3.select("body").append("div")
-                    .attr("class", "tooltip")
-                    .style("style", "absolute")
-                    .style("z-index", 10)
-                    .style("visibility", "hidden")
-                    .text("Simple test");
-    
 
     var Region = ['Land', 'Land and Ocean', 'North Hemisphere', 'South Hemisphere']
     d3.select('select')
@@ -92,20 +85,7 @@ async function init() {
         .attr('height',function(d,i) {return h(d.Land);})
         
 
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTemp5yr)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.Land})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.Land); })
-            .attr('dy', '1.5em')
+        
     };
 
     function landAndOcean(value) {
@@ -123,20 +103,7 @@ async function init() {
         .attr("width", w)
         .attr('height',function(d,i) {return h(d.LandAndOcean);})
         
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTemp5yr)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.LandAndOcean})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.LandAndOcean); })
-            .attr('dy', '1.5em')
+       
     };
 
     function nhem(value) {
@@ -154,20 +121,6 @@ async function init() {
         .attr("width", w)
         .attr('height',function(d,i) {return h(d.NHem);})
 
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTemp5yr)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.NHem})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.NHem); })
-            .attr('dy', '1.5em')
     };
 
 
@@ -186,51 +139,54 @@ async function init() {
         .attr("width", w)
         .attr('height',function(d,i) {return h(d.SHem);})
 
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTemp5yr)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.SHem})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.SHem); })
-            .attr('dy', '1.5em')
     };
 
-    svg
-        .append('g')
-        .selectAll('rect')
-        .data(globalTemp5yr)
-        .enter()
-        .append('text')
-        .text(function(d) { return d.Land})
-        .attr('id', 'barstat')
-        .attr('transform','translate(185,45)')
-        .attr("text-anchor", "middle")
-        .attr("fill", "black")
-        .attr('x', function(d) { return x(d.Year); })
-        .attr('y', function(d) { return y(d.Land); })
-        .attr('dy', '1.5em')
+    // svg
+    //     .append('g')
+    //     .selectAll('rect')
+    //     .data(globalTemp5yr)
+    //     .enter()
+    //     .append('text')
+    //     .text(function(d) { return d.Land})
+    //     .attr('id', 'barstat')
+    //     .attr('transform','translate(185,45)')
+    //     .attr("text-anchor", "middle")
+    //     .attr("fill", "black")
+    //     .attr('x', function(d) { return x(d.Year); })
+    //     .attr('y', function(d) { return y(d.Land); })
+    //     .attr('dy', '1.5em')
 
-    svg
-        .append('g')
-        .attr('transform','translate(175,75)')
-        .call(d3.axisLeft(y));
-    svg
-        .append('g')
-        .attr('transform','translate(175,575)')
-        .call(d3.axisBottom(x))
-        .selectAll('text')
-        .attr("y", 0)
-        .attr("x", 9)
-        .attr("dy", ".35em")
-        .attr('transform','rotate(90)')
-        .style("text-anchor", "start");
+    // svg
+    //     .append('g')
+    //     .attr('transform','translate(175,75)')
+    //     .call(d3.axisLeft(y));
+    // svg
+    //     .append('g')
+    //     .attr('transform','translate(175,575)')
+    //     .call(d3.axisBottom(x))
+    //     .selectAll('text')
+    //     .attr("y", 0)
+    //     .attr("x", 9)
+    //     .attr("dy", ".35em")
+    //     .attr('transform','rotate(90)')
+    //     .style("text-anchor", "start");
+
+    svg.append("g").attr("transform", "translate(50,50)").selectAll("rect")
+    .data(data).enter()
+    .append("rect")
+    .attr("x", function(d) { return x(d); })
+    .attr("y", function(d) { return y(d); })
+    .attr("width", x.bandwidth())
+    .attr("height", function(d) { return h(d); });
+
+    svg.append("g")
+    .attr("transform","translate("+margin+","+margin+")")
+    .call(d3.axisLeft(yScale));
+
+    svg.append("g")
+    .attr("transform", "translate("+margin+","+height+")")
+    .call(d3.axisBottom(xScale));
+
 
 
 
