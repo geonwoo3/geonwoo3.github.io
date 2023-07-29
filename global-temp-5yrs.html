@@ -92,7 +92,7 @@ async function init() {
         .attr("x", function(d) { return xscale(year_d); })
         .attr("y",function(d, i) {return yscale(land_d);})
         .attr("width", w)
-        .attr("height",function(d, i) {return h(d.Land);});
+        .attr("height",function(d, i) {return h(land_d);});
         
 
         
@@ -162,7 +162,7 @@ async function init() {
     .call(d3.axisLeft(yscale));
 
     svg.append("g")
-    .attr("transform", "translate("+50+","+250+")")
+    .attr("transform", "translate("+50+","+300+")")
     .call(d3.axisBottom(xscale));
 
 
