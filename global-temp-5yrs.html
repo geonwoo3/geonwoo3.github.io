@@ -79,6 +79,7 @@ async function init() {
     ;});
 
     function land(value) {
+        
         console.log(value);
 
         d3.select('svg').selectAll("rect").remove();
@@ -88,10 +89,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(50,50)')
-        .attr("x", function(d) { return xscale(d); })
-        .attr('y',function(d) {return yscale(d);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr('y',function(d) {return yscale(d.Land);})
         .attr("width", w)
-        .attr('height',function(d) {return h(i);});
+        .attr('height',function(d) {return h(d.Land);});
         
 
         
