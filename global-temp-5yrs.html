@@ -40,7 +40,7 @@ async function init() {
 
     
     const data = await d3.csv("global-temp-5yr_csv.csv");
-    const year_d = data.map(d => +d.Year)
+    const year_d = data.map(d => +d.Year);
     const land_d = data.map(d => +d.Land);
     const landAndOcean_d = data.map(d => +d.LandAndOcean);
     const shem_d = data.map(d => +d.SHem);
@@ -67,13 +67,13 @@ async function init() {
     d3.select("#stats")
     .on("change", function() {
         if (this.value === 'Land') {
-            land(this.value)
+            land(this.value);
         } else if (this.value === 'Land and Ocean') {
-            landAndOcean(this.value)
+            landAndOcean(this.value);
         } else if (this.value == 'North Hemisphere') {
-            nhem(this.value)
+            nhem(this.value);
         } else {
-            shem(this.value)
+            shem(this.value);
         }
     ;});
 
