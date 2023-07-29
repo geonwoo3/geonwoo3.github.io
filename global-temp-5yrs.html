@@ -56,6 +56,7 @@ async function init() {
 
 
     var stats = ['Land', 'Land and Ocean', 'North Hemisphere', 'South Hemisphere'];
+
     d3.select('select')
     .selectAll('groups')
     .data(stats)
@@ -79,9 +80,10 @@ async function init() {
 
     function land(value) {
         console.log(value);
+
         d3.select('svg').selectAll("rect").remove();
 
-        svg.append("g").attr("transform", "translate(50,50)")
+        d3.select('svg').selectAll('rect').
         .data(year_d)
         .enter()
         .append("rect")
