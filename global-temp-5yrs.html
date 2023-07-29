@@ -205,7 +205,7 @@ async function init() {
     svg
         .append('g')
         .selectAll('rect')
-        .data(data)
+        .data(globalTemp5yr)
         .enter()
         .append('text')
         .text(function(d) { return d.Land})
