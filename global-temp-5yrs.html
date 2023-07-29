@@ -93,7 +93,7 @@ async function init() {
         .append("rect")
         .attr('transform','translate(50,50)')
         .attr("x", function(d) { return xscale(year_d); })
-        .attr("y",function(d, i) {return yscale(land_d);})
+        .attr("y",function(d) {return yscale(land_d);})
         .attr("width", w)
         .attr("height",function(d, i) {return h(land_d);});
         
