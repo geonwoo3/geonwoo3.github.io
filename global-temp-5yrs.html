@@ -54,7 +54,7 @@ async function init() {
     var hh = d3.scaleLinear().range([0, 1500]).domain([-1, 1]);
 
     //var scale_land = land_d.map(value => hh(value));
-    var scale_land = d3.scaleLinear().range([0,1500]).domain(land_d);
+    var scale_land = d3.scaleLinear().range([0,1500]).domain([-1, 1]);
     var scale_landAndOcean = d3.scaleLinear().domain([landAndOcean_d]).range([0, 1500]);
     var scale_shem = d3.scaleLinear().domain([shem_d]).range([0, 1500]);
     var scale_nhem = d3.scaleLinear().domain([nhem_d]).range([0, 1500]);
@@ -162,7 +162,7 @@ async function init() {
     };
 
     svg.append("g")
-        .attr("transform", "translate(150, 50)")
+        .attr("transform", "translate(50, 50)")
         .selectAll('rect')
         .data(data)
         .enter()
