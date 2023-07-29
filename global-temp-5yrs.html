@@ -47,7 +47,7 @@ async function init() {
     const shem_d = data.map(d => +d.SHem);
     const nhem_d = data.map(d => +d.NHem);
     
-    var xscale = d3.scaleBand().range([0, 100]).domain(year_d);
+    var xscale = d3.scaleBand().range([0, 1000]).domain(year_d);
     //var xscale = year_d.map(value => x(value));
 
     var yscale = d3.scaleLinear().range([1500,0]).domain([1, -1]);
