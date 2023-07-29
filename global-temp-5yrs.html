@@ -51,9 +51,10 @@ async function init() {
     //var xscale = year_d.map(value => x(value));
 
     var yscale = d3.scaleLinear().range([1500,0]).domain([1, -1]);
-    var hh = d3.scaleLinear().range([0, 1500]).domain([-1, 1])
+    var hh = d3.scaleLinear().range([0, 1500]).domain([-1, 1]);
 
     var scale_land = land_d.map(value => hh(value));
+    //var scale_land = land_d.map(value => hh(value));
     var scale_landAndOcean = d3.scaleLinear().domain([landAndOcean_d]).range([0, 1500]);
     var scale_shem = d3.scaleLinear().domain([shem_d]).range([0, 1500]);
     var scale_nhem = d3.scaleLinear().domain([nhem_d]).range([0, 1500]);
