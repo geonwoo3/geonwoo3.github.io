@@ -94,7 +94,7 @@ async function init() {
         g.selectAll('rect').remove();
 
         g.selectAll('rect')
-        .data(year_d)
+        .data(data)
         .enter()
         .append("rect")
         .attr("x", function(d) { return xscale(d); })
