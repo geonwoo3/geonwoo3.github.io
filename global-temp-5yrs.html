@@ -39,12 +39,17 @@ async function init() {
     var margin = 50;
 
     
-    data = await d3.csv("global-temp-5yr_csv.csv")
+    const data = await d3.csv("global-temp-5yr_csv.csv");
+    const year_d = data.map(d => +d.Year)
+    const land_d = data.map(d => +d.Land);
+    const landAndOcean_d = data.map(d => +d.LandAndOcean);
+    const shem_d = data.map(d => +d.SHem);
+    const nhem_d = data.map(d => +d.NHem);
     
-    var xscale = d3.scaleBand().range([0, 2014 - 1880]).domain(data.Year);
+    var xscale = d3.scaleBand().range([0, 2014 - 1880]).domain(year_d);
     var yscale = d3.scaleLinear().range([100,0]).domain([-1.00,1.00]);
     var h = d3.scaleLinear().range([0, 100]).domain([-1.00, 1.00]);
-    var w = x.bandwidth();
+    var w = xscale.bandwidth();
 
 
 
@@ -81,10 +86,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(d.Year); })
-        .attr('y',function(d) {return yscale(d.Land);})
+        .attr("x", function(d) { return xscale(year_d); })
+        .attr('y',function(d) {return yscale(land_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(d.Land);});
+        .attr('height',function(d) {return h(land_d);});
         
 
         
@@ -99,10 +104,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(d.Year); })
-        .attr('y',function(d) {return yscale(d.LandAndOcean);})
+        .attr("x", function(d) { return xscale(year_d); })
+        .attr('y',function(d) {return yscale(landAndOcean_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(d.LandAndOcean);});
+        .attr('height',function(d) {return h(landAndOcean_d);});
         
        
     };
@@ -116,10 +121,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(d.Year); })
-        .attr('y',function(d) {return yscale(d.NHem);})
+        .attr("x", function(d) { return xscale(year_d); })
+        .attr('y',function(d) {return yscale(nhem_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(d.NHem);});
+        .attr('height',function(d) {return h(nhem_d);});
 
     };
 
@@ -133,10 +138,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(d.Year); })
-        .attr('y',function(d) {return yscale(d.SHem);})
+        .attr("x", function(d) { return xscale(year_d); })
+        .attr('y',function(d) {return yscale(shem_d);})
         .attr("width", w)
-        .attr('height',function(d) {return h(d.SHem);});
+        .attr('height',function(d) {return h(shem_d);});
 
     };
 
