@@ -88,10 +88,10 @@ async function init() {
         .enter()
         .append("rect")
         .attr('transform','translate(50,50)')
-        .attr("x", function(d, i) { return xscale(i); })
-        .attr('y',function(d, i) {return yscale(i);})
+        .attr("x", function(d) { return xscale(d); })
+        .attr('y',function(d) {return yscale(d);})
         .attr("width", w)
-        .attr('height',function(d, i) {return yscale(i);});
+        .attr('height',function(d) {return h(i);});
         
 
         
