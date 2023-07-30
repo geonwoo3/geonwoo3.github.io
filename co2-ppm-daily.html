@@ -39,7 +39,7 @@ async function init() {
 
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
 
-    var scale = d3.scaleLinear().range([0,100]).domain([300, 450]);
+    var scale = val_d.map(value => value - 300);
     
     
 
@@ -53,7 +53,7 @@ async function init() {
     .append("circle")
     .attr("cx", function(d) { return xscale(d.Year); })
     .attr("cy", function(d) { return yscale(d.Value); })
-    .attr("r",function(d, i) {return scale(d.Value);});
+    .attr("r",function(d, i) {return scale[i];});
 
 
     g.call(d3.axisLeft(yscale));
