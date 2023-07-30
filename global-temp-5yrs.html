@@ -52,10 +52,8 @@ async function init() {
     var hh = d3.scaleLinear().range([0, 1500]).domain([-1, 1]);
 
     //var scale_land = land_d.map(value => hh(value));
-    var scale_land = d3.scaleLinear().range([0,500]).domain(land_d);
-    var scale_landAndOcean = d3.scaleLinear().range([0,500]).domain(landAndOcean_d);
-    var scale_nhem = d3.scaleLinear().range([0,500]).domain(nhem_d);
-    var scale_shem = d3.scaleLinear().range([0,500]).domain(shem_d);
+    var scale = d3.scaleLinear().range([0,500]).domain([-1, 1]);
+    
     
 
     var w = xscale.bandwidth();
@@ -105,7 +103,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d.Year); })
         .attr("y", function(d) { return yscale(d.Land); })
         .attr("width", w)
-        .attr("height",function(d, i) {return scale_land(d.Land);});
+        .attr("height",function(d, i) {return scale(d.Land);});
         
 
         
@@ -124,7 +122,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d.Year); })
         .attr("y", function(d) { return yscale(d.LandAndOcean); })
         .attr("width", w)
-        .attr("height",function(d, i) {return scale_landAndOcean(d.LandAndOcean);});
+        .attr("height",function(d, i) {return scale(d.LandAndOcean);});
         
        
     };
@@ -142,7 +140,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d.Year); })
         .attr("y", function(d) { return yscale(d.NHem); })
         .attr("width", w)
-        .attr("height",function(d, i) {return scale_nhem(d.NHem);});
+        .attr("height",function(d, i) {return scale(d.NHem);});
 
     };
 
@@ -160,7 +158,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d.Year); })
         .attr("y", function(d) { return yscale(d.SHem); })
         .attr("width", w)
-        .attr("height",function(d, i) {return scale_shem(d.SHem);});
+        .attr("height",function(d, i) {return scale(d.SHem);});
 
     };
 
