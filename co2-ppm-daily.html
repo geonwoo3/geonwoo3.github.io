@@ -43,8 +43,8 @@ async function init() {
     var w = xscale.bandwidth();
 
 
-    var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
-    const r_d = val_d.map(value => value - 300);
+    var rr = d3.scaleLinear().range([0, 100]).domain([300, 450]);
+    const r_d = val_d.map(value => value);
 
     g.selectAll('circle')
         .data(year_d)
@@ -52,7 +52,7 @@ async function init() {
         .append("circle")
         .attr("cx", function(d) { return xscale(d); })
         .attr("cy", function(d, i) { return yscale(val_d[i]); })
-        .attr("r", function(d, i) {return rr(r_d[i]); });
+        .attr("r", function(d, i) {return rr(val_d[i]); });
 
 
     g.call(d3.axisLeft(yscale));
