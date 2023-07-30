@@ -150,6 +150,16 @@ async function init() {
         .attr("width", w)
         .attr("height",function(d, i) {return scale(d.SHem);});
 
+        createAxisAgain()
+    };
+
+    function createAxisAgain() {
+        g.call(d3.axisLeft(yscale));
+
+        svg.append("g")
+        .attr("transform", "translate("+50+","+(500 + margin)+")")
+        .call(d3.axisBottom(xscale));
+
     };
 
     g.selectAll('rect')
