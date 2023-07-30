@@ -180,7 +180,7 @@ async function init() {
     .call(d3.axisLeft(yscale));
 
     svg.append("g")
-    .attr("transform", "translate("+50+","+500+")")
+    .attr("transform", "translate("+50+","+(500 + margin)+")")
     .call(d3.axisBottom(xscale));
 
 
