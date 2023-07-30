@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<script src='http://d3js.org/ds.v5.min.js'></script>
+<script src='https://d3js.org/d3.v5.min.js'></script>
 
 
 <title> CS 416 Narrative Visualization Project </title>
@@ -9,18 +9,14 @@
 
 
 
-<p class="Region">Statistics</p>
+<p class="stats">Regional Choices</p>
 <style>
-    rect {fill: antiquewhite; strock: white; }
-    p.Region { position: absolute; left: 5px; top: 250px; }
-    select { position: absolute; left: 5px; top: 290px; }
-    div.slide { position: absolute; left: 5px; top: 220px; }
+    rect {fill: antiquewhite;}
+    p.stats { position: absolute; left: 5px; top: 670px; }
+    select { position: absolute; left: 5px; top: 710px; }
+    div.slide { position: absolute; left: 5px; top: 640px; }
 </style>
-<select id="Region"></select>
-
-<div class="slide">
-    <a href="hound.html"><button type= "button">next</button> </a>
-</div>
+<select id="stats"></select>
 
 
 
@@ -29,233 +25,153 @@
 
 <body>
 
-<svg width = 10000 height = 1500></svg>
+<svg width = 5000 height = 2000></svg>
 
 
 
 <script>
 
 async function init() {
-
-    
-    const globalTempAnnual = await d3.csv("data/global-temp-annual_csv.csv")
-    
-    var x = d3.scaleBand().rangeRound([1880, 2014]).domain(globalTempAnnual.map(function(d) { return d.Year; }))
-    var y = d3.scaleLinear().range([5,-5]).domain([0, 200]);
-    var h = d3.scaleLinear().domain([0, 200]).range([0,500]);
-    var w = x.bandwidth();
-
-
-
-
-    var tooltip = d3.select("body").append("div")
-                    .attr("class", "tooltip")
-                    .style("style", "absolute")
-                    .style("z-index", 10)
-                    .style("visibility", "hidden")
-                    .text("Simple test");
+    var margin = 50;
+    var svg = d3.select("svg");
+    var g = svg.append('g').attr("transform", "translate("+margin+", "+margin+")");
     
 
-    var Region = ['Land', 'Land and Ocean', 'North Hemisphere', 'South Hemisphere']
+    
+    const data = await d3.csv("global-temp-annual_csv.csv");
+    const year_d = data.map(d => +d.Year);
+    const land_d = data.map(d => +d.Land);
+    const landAndOcean_d = data.map(d => +d.LandAndOcean);
+    const shem_d = data.map(d => +d.SHem);
+    const nhem_d = data.map(d => +d.NHem);
+    
+    var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
+    //var xscale = year_d.map(value => x(value));
+
+    var yscale = d3.scaleLinear().range([500,0]).domain([-1, 1]);
+
+    var scale = d3.scaleLinear().range([0,500]).domain([-1, 1]);
+    
+    
+
+    var w = xscale.bandwidth();
+
+
+
+
+
+    var stats = ['Land', 'Land and Ocean', 'North Hemisphere', 'South Hemisphere'];
+
     d3.select('select')
     .selectAll('groups')
-    .data(Region)
+    .data(stats)
     .enter()
     .append('option')
     .text(function (d) { return d; })
-    .property("selected", function (d) {return d === 'asdasdasd'})
+    .property("selected", function (d) {return d === 'Land'; });
 
-    d3.select("#Region")
+    d3.select("#stats")
     .on("change", function() {
         if (this.value === 'Land') {
-            land(this.value)
+            land(this.value);
         } else if (this.value === 'Land and Ocean') {
-            landAndOcean(this.value)
-        } else if (this.value == 'North Hemisphere') {
-            nhem(this.value)
+            landAndOcean(this.value);
+        } else if (this.value === 'North Hemisphere') {
+            nhem(this.value);
         } else {
-            shem(this.value)
+            shem(this.value);
         }
-    })
+    });
+
+
+
 
     function land(value) {
+        
         console.log(value);
-        d3.select('svg').selectAll("rect").remove()
-        d3.select('svg').selectAll('#barstat').remove();
 
-        bars
-        .data(globalTempAnnual)
+        g.selectAll('rect').remove();
+
+        g.selectAll('rect')
+        .data(data)
         .enter()
         .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return x(d.Year); })
-        .attr('y',function(d) {return y(d.Land);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.Land); })
         .attr("width", w)
-        .attr('height',function(d,i) {return h(d.Land);})
+        .attr("height",function(d, i) {return scale(d.Land);});
         
 
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTempAnnual)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.Land})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.Land); })
-            .attr('dy', '1.5em')
+        
     };
 
     function landAndOcean(value) {
         console.log(value);
-        d3.select('svg').selectAll("rect").remove()
-        d3.select('svg').selectAll('#barstat').remove();
+        g.selectAll("rect").remove();
 
-        bars
-        .data(globalTempAnnual)
+        g.selectAll('rect')
+        .data(data)
         .enter()
         .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return x(d.Year); })
-        .attr('y',function(d) {return y(d.LandAndOcean);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.LandAndOcean); })
         .attr("width", w)
-        .attr('height',function(d,i) {return h(d.LandAndOcean);})
-        .append('title')
-        .text(d => "Average Puppy Price: " + d.AverageBabyPrice +
-                    "\nWorking Group: " + d.Group1 )
-            .on("mouseover", d => {tooltip.text(d.BreedName + " Average Puppy Price: " + d.AverageBabyPrice + "\nWorking Group: " + d.Group1); return tooltip.style("visibility", "visible")})
-            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-            .on("mouseout", () => tooltip.style("visibility", "hidden"));
-
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTempAnnual)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.LandAndOcean})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.LandAndOcean); })
-            .attr('dy', '1.5em')
+        .attr("height",function(d, i) {return scale(d.LandAndOcean);});
+        
+       
     };
 
     function nhem(value) {
         console.log(value);
-        d3.select('svg').selectAll("rect").remove()
-        d3.select('svg').selectAll('#barstat').remove();
+        g.selectAll("rect").remove();
 
-        bars
-        .data(globalTempAnnual)
+        g.selectAll('rect')
+        .data(data)
         .enter()
         .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return x(d.Year); })
-        .attr('y',function(d) {return y(d.NHem);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.NHem); })
         .attr("width", w)
-        .attr('height',function(d,i) {return h(d.NHem);})
-        .append('title')
-        .text(d => "Average Puppy Price: " + d.AverageBabyPrice +
-                    "\nWorking Group: " + d.Group1 )
-            .on("mouseover", d => {tooltip.text(d.BreedName + " Average Puppy Price: " + d.AverageBabyPrice + "\nWorking Group: " + d.Group1); return tooltip.style("visibility", "visible")})
-            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-            .on("mouseout", () => tooltip.style("visibility", "hidden"));
+        .attr("height",function(d, i) {return scale(d.NHem);});
 
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTempAnnual)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.NHem})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.NHem); })
-            .attr('dy', '1.5em')
     };
 
 
     function shem(value) {
         console.log(value);
-        d3.select('svg').selectAll("rect").remove()
-        d3.select('svg').selectAll('#barstat').remove();
+        d3.select('svg').selectAll("rect").remove();
 
-        bars
-        .data(globalTempAnnual)
-        .enter()
-        .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return x(d.Year); })
-        .attr('y',function(d) {return y(d.SHem);})
-        .attr("width", w)
-        .attr('height',function(d,i) {return h(d.SHem);})
-        .append('title')
-        .text(d => "Average Puppy Price: " + d.AverageBabyPrice +
-                    "\nWorking Group: " + d.Group1 )
-            .on("mouseover", d => {tooltip.text(d.BreedName + " Average Puppy Price: " + d.AverageBabyPrice + "\nWorking Group: " + d.Group1); return tooltip.style("visibility", "visible")})
-            .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-            .on("mouseout", () => tooltip.style("visibility", "hidden"));
-
-        svg
-            .append('g')
-            .selectAll('rect')
-            .data(globalTempAnnual)
-            .enter()
-            .append('text')
-            .text(function(d) { return d.SHem})
-            .attr('id', 'barstat')
-            .attr('transform','translate(185,45)')
-            .attr("text-anchor", "middle")
-            .attr("fill", "black")
-            .attr('x', function(d) { return x(d.Year); })
-            .attr('y', function(d) { return y(d.SHem); })
-            .attr('dy', '1.5em')
-    };
-
-    svg
-        .append('g')
-        .selectAll('rect')
+        g.selectAll('rect')
         .data(data)
         .enter()
-        .append('text')
-        .text(function(d) { return d.Land})
-        .attr('id', 'barstat')
-        .attr('transform','translate(185,45)')
-        .attr("text-anchor", "middle")
-        .attr("fill", "black")
-        .attr('x', function(d) { return x(d.Year); })
-        .attr('y', function(d) { return y(d.Land); })
-        .attr('dy', '1.5em')
+        .append("rect")
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.SHem); })
+        .attr("width", w)
+        .attr("height",function(d, i) {return scale(d.SHem);});
 
-    svg
-        .append('g')
-        .attr('transform','translate(175,75)')
-        .call(d3.axisLeft(y));
-    svg
-        .append('g')
-        .attr('transform','translate(175,575)')
-        .call(d3.axisBottom(x))
-        .selectAll('text')
-        .attr("y", 0)
-        .attr("x", 9)
-        .attr("dy", ".35em")
-        .attr('transform','rotate(90)')
-        .style("text-anchor", "start");
+    };
 
+    g.selectAll('rect')
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", function(d) { return xscale(d.Year); })
+    .attr("y", function(d) { return yscale(d.Land); })
+    .attr("width", w)
+    .attr("height",function(d, i) {return scale(d.Land);});
+
+
+    g.call(d3.axisLeft(yscale));
+
+    svg.append("g")
+    .attr("transform", "translate("+50+","+(500 + margin)+")")
+    .call(d3.axisBottom(xscale));
 
 
 }
 init()
+
 
 </script>
 
