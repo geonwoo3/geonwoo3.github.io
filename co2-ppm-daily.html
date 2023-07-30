@@ -29,6 +29,9 @@ async function init() {
     
     
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
+
+    console.log(year_d)
+
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
     var w = xscale.bandwidth();
 
