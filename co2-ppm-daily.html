@@ -46,7 +46,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d.Year); })
         .attr("y", function(d) { return yscale(d.Ppm); })
         .attr("width", w)
-        .attr("height",function(d, i) {return rr(d.Ppm);});
+        .attr("height", function(d, i) {return rr(d.Ppm);});
 
 
     g.call(d3.axisLeft(yscale));

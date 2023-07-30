@@ -30,7 +30,7 @@
 async function init() {
     var margin = 50;
     var svg = d3.select("svg");
-    var g = svg.append('g').attr("transform", "translate("+150+", "+150+")");
+    var g = svg.append('g').attr("transform", "translate("+500+", "+500+")");
     
 
     
@@ -93,7 +93,7 @@ async function init() {
 
     afg = [1194,1393,74,14];
 
-    svg.selectAll("path")
+    g.selectAll("path")
         .data(pie(afg))
         .enter()
         .append("path")
