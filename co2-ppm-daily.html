@@ -28,23 +28,24 @@ async function init() {
     
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
-
+    var w = xscale.bandwidth();
 
 
     var scale = val_d.map(value => (value - 300));
-    var rr = d3.scaleLinear().range([0, 100]).domain([300, 450]);
+    var rr = d3.scaleLinear().range([0, 400]).domain([300, 450]);
     
     
 
 
 
-    g.selectAll('circle')
+    g.selectAll('rect')
     .data(data)
     .enter()
-    .append('circle')
-    .attr("cx", function(d) { return xscale(d.Year); })
-    .attr("cy", function(d) { return yscale(d.Ppm); })
-    .attr("r", function(d) { return rr(d.Ppm); });
+    .append('rect')
+    .attr("x", function(d) { return xscale(d.Year); })
+    .attr("y", function(d) { return yscale(d.Ppm); })
+    .attr("width", w)
+    .attr("height", function(d) { return rr(d.Ppm); });
 
 
     g.call(d3.axisLeft(yscale));
