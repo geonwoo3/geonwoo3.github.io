@@ -56,8 +56,8 @@ async function init() {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return xs[i]; })
-        .attr("y", function(d) { return ys[i]; })
+        .attr("x", function(d, i) { return xs[i]; })
+        .attr("y", function(d, i) { return ys[i]; })
         .attr("width", w)
         .attr("height", function(d, i) {return rs[i];});
 
