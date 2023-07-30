@@ -50,10 +50,10 @@ async function init() {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return xscale(d.Year); })
-        .attr("y", function(d) { return yscale(d.Ppm); })
+        .attr("x", function(d) { return xscale(d); })
+        .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
-        .attr("height", function(d, i) {return rr(d.Ppm);});
+        .attr("height", function(d, i) {return rr(d);});
 
 
     g.call(d3.axisLeft(yscale));
