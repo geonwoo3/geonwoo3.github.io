@@ -32,20 +32,20 @@ async function init() {
 
 
     var scale = val_d.map(value => (value - 300));
-    var rr = d3.scaleLinear().range([0, 400]).domain([300, 450]);
+    var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
     
     
 
 
 
     g.selectAll('rect')
-    .data(data)
-    .enter()
-    .append('rect')
-    .attr("x", function(d) { return xscale(d.Year); })
-    .attr("y", function(d) { return yscale(d.Ppm); })
-    .attr("width", w)
-    .attr("height", function(d) { return rr(d.Ppm); });
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.Ppm); })
+        .attr("width", w)
+        .attr("height",function(d, i) {return rr(d.Ppm);});
 
 
     g.call(d3.axisLeft(yscale));
