@@ -23,7 +23,7 @@ async function init() {
     
     const data = await d3.csv("ppm_data_av.csv");
     const year_d = data.map(d => +d.Year);
-    const val_d = data.map(d => +d.Value);
+    var val_d = data.map(d => +d.Value);
     
     
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
@@ -31,10 +31,9 @@ async function init() {
 
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
 
-    var scale = val_d.map(Value => Value - 300);
+    var scale = val_d.map(Value => (Value - 300));
     
     
-    var w = xscale.bandwidth();
 
 
 
