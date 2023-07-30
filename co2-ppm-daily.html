@@ -42,18 +42,24 @@ async function init() {
 
     var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
     
-    
+    xs = xscale.map(year_d);
 
+    console.log(xs);
+    ys = yscale.map(val_d);
+    rs = rr.map(val_d);
+
+    console.log(ys);
+    console.log(rs);
 
 
     g.selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return xscale(d); })
-        .attr("y", function(d) { return yscale(d); })
+        .attr("x", function(d) { return xs[i]; })
+        .attr("y", function(d) { return ys[i]; })
         .attr("width", w)
-        .attr("height", function(d, i) {return rr(d);});
+        .attr("height", function(d, i) {return rs[i];});
 
 
     g.call(d3.axisLeft(yscale));
