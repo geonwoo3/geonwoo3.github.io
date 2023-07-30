@@ -24,13 +24,14 @@ async function init() {
     
     
     const data = await d3.csv("daily-ppm-record.csv");
-    const year_d = data.map(d => +d.Year);
+    const year_d = data.map(function (d) {return d.Year;} );
     const val_d = data.map(d => +d.Ppm);
     
     
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
 
     console.log(year_d)
+    console.log(ppm);
 
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
     var w = xscale.bandwidth();
