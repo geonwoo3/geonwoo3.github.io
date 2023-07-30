@@ -80,7 +80,7 @@ async function init() {
 
         g.selectAll('path').remove();
 
-        svg.selectAll("path")
+        g.selectAll("path")
         .data(pie(resourceValue))
         .enter()
         .append("path")
