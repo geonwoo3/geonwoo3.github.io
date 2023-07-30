@@ -40,9 +40,8 @@ async function init() {
     var w = xscale.bandwidth();
 
 
-    //var rr = d3.scaleLinear().range([0, 500]).domain(val_d);
+    var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
     
-
 
     g.selectAll('rect')
         .data(data)
@@ -51,7 +50,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d); })
         .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
-        .attr("height", function(d) {return val_d(d)});
+        .attr("height", function(d, i) {return rr(val_d(i))});
 
 
     g.call(d3.axisLeft(yscale));
