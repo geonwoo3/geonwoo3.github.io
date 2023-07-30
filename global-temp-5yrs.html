@@ -23,8 +23,6 @@
 
 
 
-
-
 <body>
 
 <svg width = 10000 height = 10000></svg>
@@ -54,10 +52,8 @@ async function init() {
     var hh = d3.scaleLinear().range([0, 1500]).domain([-1, 1]);
 
     //var scale_land = land_d.map(value => hh(value));
-    var scale_land = d3.scaleLinear().range([0,500]).domain([-1, 1]);
-    var scale_landAndOcean = d3.scaleLinear().domain([landAndOcean_d]).range([0, 1500]);
-    var scale_shem = d3.scaleLinear().domain([shem_d]).range([0, 1500]);
-    var scale_nhem = d3.scaleLinear().domain([nhem_d]).range([0, 1500]);
+    var scale = d3.scaleLinear().range([0,500]).domain([-1, 1]);
+    
 
     var w = xscale.bandwidth();
 
@@ -97,15 +93,16 @@ async function init() {
 
         g.selectAll('rect').remove();
 
-        g.attr("transform", "translate(50, 50)")
+        svg.append("g")
+        .attr("transform", "translate(50, 50)")
         .selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return xscale(d); })
-        .attr("y", function(d) { return yscale(d); })
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.Land); })
         .attr("width", w)
-        .attr("height",function(d) {return scale_land(d);});
+        .attr("height",function(d, i) {return scale(d.Land);});
         
 
         
@@ -115,15 +112,16 @@ async function init() {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
 
-        svg.append("g").attr("transform", "translate(50,50)")
+        svg.append("g")
+        .attr("transform", "translate(50, 50)")
+        .selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(year_d); })
-        .attr('y',function(d) {return yscale(landAndOcean_d);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.LandAndOcean); })
         .attr("width", w)
-        .attr('height',function(d) {return scale_landAndOcean(landAndOcean_d);});
+        .attr("height",function(d, i) {return scale(d.LandAndOcean);});
         
        
     };
@@ -132,15 +130,16 @@ async function init() {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
 
-        svg.append("g").attr("transform", "translate(50,50)")
+        svg.append("g")
+        .attr("transform", "translate(50, 50)")
+        .selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(year_d); })
-        .attr('y',function(d) {return yscale(nhem_d);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.NHem); })
         .attr("width", w)
-        .attr('height',function(d) {return scale_nhem(nhem_d);});
+        .attr("height",function(d, i) {return scale(d.NHem);});
 
     };
 
@@ -149,15 +148,16 @@ async function init() {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
 
-        svg.append("g").attr("transform", "translate(50,50)")
+        svg.append("g")
+        .attr("transform", "translate(50, 50)")
+        .selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
-        .attr('transform','translate(175,75)')
-        .attr("x", function(d) { return xscale(year_d); })
-        .attr('y',function(d) {return yscale(shem_d);})
+        .attr("x", function(d) { return xscale(d.Year); })
+        .attr("y", function(d) { return yscale(d.SHem); })
         .attr("width", w)
-        .attr('height',function(d) {return scale_land(shem_d);});
+        .attr("height",function(d, i) {return scale(d.SHem);});
 
     };
 
@@ -170,7 +170,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d.Year); })
         .attr("y", function(d) { return yscale(d.Land); })
         .attr("width", w)
-        .attr("height",function(d, i) {return scale_land(d.Land);});
+        .attr("height",function(d, i) {return scale(d.Land);});
 
 
     
