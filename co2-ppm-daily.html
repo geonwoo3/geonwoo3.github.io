@@ -7,7 +7,7 @@
 <h1> Global Warming Analysis </h1>
 
 
-<style> circle {fill: lightblue; stroke: black;} </style>
+<style> circle {fill: red; stroke: black;} </style>
 
 <body>
 
@@ -21,12 +21,12 @@ async function init() {
     var g = svg.append('g').attr("transform", "translate("+margin+", "+margin+")");
     
     
-    const data = await d3.csv("ppm_data_av.csv");
+    const data = await d3.csv("daily-ppm-record.csv");
     const year_d = data.map(d => +d.Year);
     const val_d = data.map(d => +d.Ppm);
     
     
-    var xscale = d3.scaleBand().range([0,4000]).domain([1958, 2020]);
+    var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
 
 
