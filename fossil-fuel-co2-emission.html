@@ -79,7 +79,7 @@ async function init() {
         g.selectAll('path').remove();
 
         svg.selectAll("path")
-        .data(pie(resourceValue));
+        .data(pie(resourceValue))
         .enter()
         .append("path")
         .attr("d", arc)
@@ -94,7 +94,7 @@ async function init() {
     afg = [1194,1393,74,14];
 
     svg.selectAll("path")
-        .data(pie(afg));
+        .data(pie(afg))
         .enter()
         .append("path")
         .attr("d", arc)
