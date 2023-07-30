@@ -23,7 +23,7 @@ async function init() {
     
     const data = await d3.csv("ppm_data_av.csv");
     const year_d = data.map(d => +d.Year);
-    const val_d = data.map(d => +d.Value);
+    const val_d = data.map(d => +d.Ppm);
     
     
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
@@ -31,7 +31,7 @@ async function init() {
 
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
 
-    var scale = val_d.map(Value => (Value - 300));
+    var scale = val_d.map(value => (value - 300));
     var rr = d3.scaleLinear().range([0, 100]).domain([300, 450]);
     
     
@@ -43,8 +43,8 @@ async function init() {
     .enter()
     .append('circle')
     .attr("cx", function(d) { return xscale(d.Year); })
-    .attr("cy", function(d) { return yscale(d.Value); })
-    .attr("r", function(d) { return rr(d.Value); });
+    .attr("cy", function(d) { return yscale(d.Ppm); })
+    .attr("r", function(d) { return rr(d.Ppm); });
 
 
     g.call(d3.axisLeft(yscale));
