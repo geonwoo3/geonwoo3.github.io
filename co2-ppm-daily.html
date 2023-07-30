@@ -34,7 +34,6 @@ async function init() {
     var scale = val_d.map(Value => Value - 300);
     
     
-
     var w = xscale.bandwidth();
 
 
@@ -45,7 +44,7 @@ async function init() {
     .append("circle")
     .attr("cx", function(d) { return xscale(d.Year); })
     .attr("cy", function(d) { return yscale(d.Value); })
-    .attr("r",function(d) {return parseInt(d.Value) - 300;});
+    .attr("r", function(d) { return parseInt(d.Value) - 300; });
 
 
     g.call(d3.axisLeft(yscale));
