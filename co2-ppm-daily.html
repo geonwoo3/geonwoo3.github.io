@@ -36,11 +36,11 @@ async function init() {
     console.log(year_d);
     console.log(val_d);
 
-    var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
+    var yscale = d3.scaleLinear().range([500,0]).domain(val_d);
     var w = xscale.bandwidth();
 
 
-    var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
+    var rr = d3.scaleLinear().range([0, 500]).domain(val_d);
     
 
     g.selectAll('rect')
@@ -50,7 +50,7 @@ async function init() {
         .attr("x", function(d) { return xscale(d); })
         .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
-        .attr("height", function(d, i) {return rr(val_d(i))});
+        .attr("height", function(d) {return rr(d); });
 
 
     g.call(d3.axisLeft(yscale));
