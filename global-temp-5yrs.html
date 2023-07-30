@@ -12,9 +12,9 @@
 <p class="stats">Regional Choices</p>
 <style>
     rect {fill: antiquewhite;}
-    p.stats { position: absolute; left: 5px; top: 650px; }
-    select { position: absolute; left: 5px; top: 690px; }
-    div.slide { position: absolute; left: 5px; top: 620px; }
+    p.stats { position: absolute; left: 5px; top: 670px; }
+    select { position: absolute; left: 5px; top: 710px; }
+    div.slide { position: absolute; left: 5px; top: 640px; }
 </style>
 <select id="stats"></select>
 
@@ -25,7 +25,7 @@
 
 <body>
 
-<svg width = 10000 height = 10000></svg>
+<svg width = 5000 height = 2000></svg>
 
 
 
@@ -48,10 +48,10 @@ async function init() {
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
     //var xscale = year_d.map(value => x(value));
 
-    var yscale = d3.scaleLinear().range([250,-250]).domain([-1, 1]);
+    var yscale = d3.scaleLinear().range([500, -500]).domain([-1, 1]);
 
     //var scale_land = land_d.map(value => hh(value));
-    var scale = d3.scaleLinear().range([-250,250]).domain([-1, 1]);
+    var scale = d3.scaleLinear().range([-500,500]).domain([-1, 1]);
     
     
 
