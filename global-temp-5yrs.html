@@ -48,7 +48,7 @@ async function init() {
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
     //var xscale = year_d.map(value => x(value));
 
-    var yscale = d3.scaleLinear().range([500, -500]).domain([-1, 1]);
+    var yscale = d3.scaleLinear().range([500,-500]).domain([-1, 1]);
 
     //var scale_land = land_d.map(value => hh(value));
     var scale = d3.scaleLinear().range([-500,500]).domain([-1, 1]);
