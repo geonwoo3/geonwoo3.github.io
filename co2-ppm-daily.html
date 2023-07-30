@@ -26,10 +26,10 @@ async function init() {
     const val_d = data.map(d => +d.Ppm);
     
     
-    var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
-    //var xscale = year_d.map(value => x(value));
-
+    var xscale = d3.scaleBand().range([0,4000]).domain([1958, 2020]);
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
+
+
 
     var scale = val_d.map(value => (value - 300));
     var rr = d3.scaleLinear().range([0, 100]).domain([300, 450]);
