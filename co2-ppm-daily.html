@@ -34,26 +34,26 @@ async function init() {
     const val_d = [315,316,317,318,319,319,319,320,322,322,323,325,326,326,328,330,330,331,332,334,335,337,339,340,341,343,345,346,347,349,352,353,354,356,356,357,359,361,363,364,367,368,370,371,373,376,377,380,382,384,386,387,390,392,394,396,399,401,404,407,407,411,415];
     
     
-    var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
+    var xscale = d3.scaleBand().range([0, 3000]).domain(year_d);
 
     console.log(year_d);
     console.log(val_d);
 
-    var yscale = d3.scaleLinear().range([500,0]).domain(val_d);
+    var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
     var w = xscale.bandwidth();
 
 
-    var rr = d3.scaleLinear().range([0, 500]).domain(val_d);
+    var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
     
 
     g.selectAll('rect')
-        .data(data)
+        .data(year_d)
         .enter()
         .append("rect")
         .attr("x", function(d) { return xscale(d); })
         .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
-        .attr("height", function(d, i) {return rr(d, i); });
+        .attr("height", function(d, i) {return rr(val_d(i)); });
 
 
     g.call(d3.axisLeft(yscale));
