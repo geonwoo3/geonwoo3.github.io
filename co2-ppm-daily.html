@@ -6,6 +6,8 @@
 <title> CS 416 Narrative Visualization Project </title>
 <h1> Global Warming Analysis </h1>
 
+<h4>The value is annual average CO2 PPM</h4>
+
 <style>
     rect {fill: lightcyan; stroke: black; }
     p.stats { position: absolute; left: 10px; top: 670px; }
@@ -24,6 +26,7 @@ async function init() {
     var margin = 50;
     var svg = d3.select("svg");
     var g = svg.append('g').attr("transform", "translate("+margin+", "+margin+")");
+    
     
     
     const data = await d3.csv("daily-ppm-record.csv");
