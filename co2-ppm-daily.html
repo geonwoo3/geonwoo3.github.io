@@ -9,25 +9,17 @@
 
 
 
-
-
-
-
-
 <body>
 
 <svg width = 5000 height = 2000></svg>
 
 
-
 <script>
-
 async function init() {
     var margin = 50;
     var svg = d3.select("svg");
     var g = svg.append('g').attr("transform", "translate("+margin+", "+margin+")");
     
-
     
     const data = await d3.csv("ppm_data_av.csv");
     const year_d = data.map(d => +d.Year);
@@ -39,7 +31,7 @@ async function init() {
 
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
 
-    var scale = val_d.map(value => value - 300);
+    var scale = val_d.map(Value => Value - 300);
     
     
 
@@ -53,7 +45,7 @@ async function init() {
     .append("circle")
     .attr("cx", function(d) { return xscale(d.Year); })
     .attr("cy", function(d) { return yscale(d.Value); })
-    .attr("r",function(d, i) {return scale[i];});
+    .attr("r",function(d) {return parseInt(d.Value) - 300;});
 
 
     g.call(d3.axisLeft(yscale));
