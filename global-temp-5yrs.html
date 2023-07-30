@@ -50,7 +50,6 @@ async function init() {
 
     var yscale = d3.scaleLinear().range([500,0]).domain([-1, 1]);
 
-    //var scale_land = land_d.map(value => hh(value));
     var scale = d3.scaleLinear().range([0,500]).domain([-1, 1]);
     
     
@@ -93,9 +92,7 @@ async function init() {
 
         g.selectAll('rect').remove();
 
-        svg.append("g")
-        .attr("transform", "translate(50, 50)")
-        .selectAll('rect')
+        g.selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
@@ -110,11 +107,9 @@ async function init() {
 
     function landAndOcean(value) {
         console.log(value);
-        d3.select('svg').selectAll("rect").remove();
+        g.selectAll("rect").remove();
 
-        svg.append("g")
-        .attr("transform", "translate(50, 50)")
-        .selectAll('rect')
+        g.selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
@@ -128,11 +123,9 @@ async function init() {
 
     function nhem(value) {
         console.log(value);
-        d3.select('svg').selectAll("rect").remove();
+        g.selectAll("rect").remove();
 
-        svg.append("g")
-        .attr("transform", "translate(50, 50)")
-        .selectAll('rect')
+        g.selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
@@ -148,9 +141,7 @@ async function init() {
         console.log(value);
         d3.select('svg').selectAll("rect").remove();
 
-        svg.append("g")
-        .attr("transform", "translate(50, 50)")
-        .selectAll('rect')
+        g.selectAll('rect')
         .data(data)
         .enter()
         .append("rect")
@@ -161,23 +152,17 @@ async function init() {
 
     };
 
-    svg.append("g")
-        .attr("transform", "translate(50, 50)")
-        .selectAll('rect')
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", function(d) { return xscale(d.Year); })
-        .attr("y", function(d) { return yscale(d.Land); })
-        .attr("width", w)
-        .attr("height",function(d, i) {return scale(d.Land);});
+    g.selectAll('rect')
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", function(d) { return xscale(d.Year); })
+    .attr("y", function(d) { return yscale(d.Land); })
+    .attr("width", w)
+    .attr("height",function(d, i) {return scale(d.Land);});
 
 
-    
-
-    svg.append("g")
-    .attr("transform","translate("+margin+","+margin+")")
-    .call(d3.axisLeft(yscale));
+    g.call(d3.axisLeft(yscale));
 
     svg.append("g")
     .attr("transform", "translate("+50+","+(500 + margin)+")")
