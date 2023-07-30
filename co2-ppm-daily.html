@@ -42,13 +42,8 @@ async function init() {
 
     var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
     
-    xs = xscale.map(year_d);
-
-    console.log(xs);
-    ys = yscale.map(val_d);
     rs = rr.map(val_d);
 
-    console.log(ys);
     console.log(rs);
 
 
@@ -56,10 +51,10 @@ async function init() {
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d, i) { return xs[i]; })
-        .attr("y", function(d, i) { return ys[i]; })
+        .attr("x", function(d) { return xscale(d); })
+        .attr("y", function(d) { return yscale(d); })
         .attr("width", w)
-        .attr("height", function(d, i) {return rs[i];});
+        .attr("height", function(d, i) {return rs(i);});
 
 
     g.call(d3.axisLeft(yscale));
