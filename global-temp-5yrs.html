@@ -168,7 +168,7 @@ async function init() {
         .enter()
         .append("rect")
         .attr("x", function(d) { return xscale(d.Year); })
-        .attr("y", function(d) { return 50; })
+        .attr("y", function(d) { return yscale(d.Land); })
         .attr("width", w)
         .attr("height",function(d, i) {return scale_land(d.Land);});
 
