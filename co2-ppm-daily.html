@@ -7,7 +7,10 @@
 <h1> Global Warming Analysis </h1>
 
 <style>
-    rect {fill: antiquewhite; stroke: black;}
+    rect {fill: lightcyan; stroke: black; }
+    p.stats { position: absolute; left: 10px; top: 670px; }
+    select { position: absolute; left: 10px; top: 710px; }
+    
 </style>
 
 
@@ -30,7 +33,7 @@ async function init() {
     
     var xscale = d3.scaleBand().range([0, 4000]).domain(year_d);
 
-    console.log(year_d)
+    console.log(year_d);
     console.log(ppm);
 
     var yscale = d3.scaleLinear().range([500,0]).domain([300, 450]);
