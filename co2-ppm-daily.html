@@ -9,7 +9,7 @@
 <h4>The value is annual average CO2 PPM</h4>
 
 <style>
-    rect {fill: lightcyan; stroke: black; }
+    circle {fill: lightcyan; stroke: black; }
     p.stats { position: absolute; left: 10px; top: 670px; }
     select { position: absolute; left: 10px; top: 710px; }
     
@@ -46,14 +46,13 @@ async function init() {
     var rr = d3.scaleLinear().range([0, 500]).domain([300, 450]);
     
 
-    g.selectAll('rect')
+    g.selectAll('circle')
         .data(year_d)
         .enter()
-        .append("rect")
-        .attr("x", function(d) { return xscale(d); })
-        .attr("y", function(d, i) { return yscale(val_d[i]); })
-        .attr("width", w)
-        .attr("height", function(d, i) {return rr(val_d[i]); });
+        .append("circle")
+        .attr("cx", function(d) { return xscale(d); })
+        .attr("cy", function(d, i) { return yscale(val_d[i]); })
+        .attr("r", function(d, i) {return rr(val_d[i]); });
 
 
     g.call(d3.axisLeft(yscale));
